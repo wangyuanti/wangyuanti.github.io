@@ -83,11 +83,11 @@
 <meta name="keywords" content="redux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux">
-<meta property="og:url" content="http://yoursite.com/2018/06/14/React-Redux/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/06/15/redux/index.html">
 <meta property="og:site_name" content="WYT">
 <meta property="og:description" content="什么是redux?reducer + FluxRedux对于JavaScript应用而言是一个可预测状态的容器 Redux核心概念storereducersactions 安装npm i redux -D  安装 简易流程1.引入redux import { createStore } from &amp;quot;redux&amp;quot;; 2.创建一个纯函数的reducer const reducer">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-14T14:43:25.270Z">
+<meta property="og:updated_time" content="2018-06-15T15:14:30.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux">
 <meta name="twitter:description" content="什么是redux?reducer + FluxRedux对于JavaScript应用而言是一个可预测状态的容器 Redux核心概念storereducersactions 安装npm i redux -D  安装 简易流程1.引入redux import { createStore } from &amp;quot;redux&amp;quot;; 2.创建一个纯函数的reducer const reducer">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/14/React-Redux/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/15/redux/"/>
 
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/React-Redux/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/redux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="WYT">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T22:14:17+08:00">
-                2018-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-15T23:14:30+08:00">
+                2018-06-15
               </time>
             
 
@@ -408,6 +408,38 @@ const reducers = combineReducers({
     r2:reducer2
 });
 const store = createStore(reducers);
+</code></pre><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><pre><code>import React from &apos;react&apos;;
+import ReactDOM from &apos;react-dom&apos;;
+//从redux引用
+import {createStore} from &apos;redux&apos;;
+import App from &apos;./redux/redux1&apos;;
+//写一个纯函数reducer
+const reducer = (state=0,action) =&gt; {
+    switch(action.type){
+//      这两个case是store.dispatch触发的事件
+        case &quot;ADD&quot;:
+            return state += action.payload;
+        case &quot;MINUS&quot;:
+            let num = state -= action.payload;
+            if(num&lt;0)num=0;
+            return num;
+        default:
+            return state;
+    }
+}
+//创建store
+const store = createStore(reducer);
+//发起action，payload是传送的数据,名字可以随便改
+store.dispatch({type:&quot;ADD&quot;,payload:1});
+//用getState获取数据
+console.log(store.getState())
+ReactDOM.render(
+    &lt;App store={store}/&gt;,
+    document.getElementById(&apos;root&apos;)
+)
+if(module.hot){
+    module.hot.accept();
+}
 </code></pre>
       
     </div>
@@ -587,7 +619,7 @@ const store = createStore(reducers);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是redux"><span class="nav-number">1.</span> <span class="nav-text">什么是redux?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redux核心概念"><span class="nav-number">2.</span> <span class="nav-text">Redux核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简易流程"><span class="nav-number">4.</span> <span class="nav-text">简易流程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是redux"><span class="nav-number">1.</span> <span class="nav-text">什么是redux?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redux核心概念"><span class="nav-number">2.</span> <span class="nav-text">Redux核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简易流程"><span class="nav-number">4.</span> <span class="nav-text">简易流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a></li></ol></div>
             
 
           </div>
